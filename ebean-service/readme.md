@@ -6,16 +6,16 @@
 
 如何使用
 ------
-1.首先```mvn install```
-2.把要使用ebean的模块里的pom.xml(如user-service)，加上mvn依赖
-```sql
+1.首先```mvn install```ebean-service模块
+2.把要使用ebean模块的pom.xml(如user-service)里加上mvn依赖
+```xml
 <dependency>
 	<groupId>com.xzxy</groupId>
 	<artifactId>ebean-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 </dependency>
 ```
-3.在要使用ebean的模块的里pom.xml里添加插件
+3.在要使用ebean模块的pom.xml里添加插件
 ```xml
 <plugin>
 	<groupId>io.repaint.maven</groupId>
@@ -30,4 +30,4 @@
 	</configuration>
 </plugin>
 ```
-4.在新建会修改完了@entity注解的实体类后，要记得install实体类所在的模块
+4.在新建和修改了@entity注解的实体类后，要记得install实体类所在的模块
