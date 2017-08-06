@@ -3,13 +3,17 @@ package com.xzxy.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
+
+import com.avaje.ebean.Model;
 
 @Entity
-public class User {
+@Table(name="t_user")
+public class User extends Model {
 
 	@Id
     @GeneratedValue
-	private Long id;
+	private Integer id;
 	
 	private String name;
 	
@@ -17,21 +21,11 @@ public class User {
 	
 	private Integer age;
 
-	public User() {
-		super();
-	}
-
-	public User(String name, Integer age) {
-		super();
-		this.name = name;
-		this.age = age;
-	}
-
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

@@ -1,53 +1,83 @@
 package com.xzxy;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.xzxy.model.User;
-import com.xzxy.model.UserRepository;
+import com.xzxy.commons.http.HTTP;
+import com.xzxy.commons.json.Json;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(UserServiceApplication.class)
 public class ApplicationTests {
-	@Autowired
-	private UserRepository userRepository;
-	
+
 	@Test
 	public void testAdd() throws Exception {
-		// 创建10条记录
-		userRepository.save(new User("AAA", 10));
+		try {
+			String url = "http://localhost:2222/user/add";
+			Map<String, String> params = this.getUserParam();
+			System.out.println("request url:" + url);
+			System.out.println("request body:" + Json.stringify(Json.toJson(params)));
+			String post = HTTP.post(url, params).toStr();
+			System.out.println("response body:" + post);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-	
+
 	@Test
-	public void testLoad() throws Exception {
-		User u = userRepository.find(1L);
-		System.err.println(u.getName()+","+u.getAge());
-	}
-	
-	@Test
-	public void testFindAll() throws Exception {
-		List<User> list = userRepository.findAll();
-		for(User u : list){
-			System.err.println(u.getName()+","+u.getAge());
+	public void testSearch() {
+		try {
+			String url = "http://localhost:2222/user/search";
+			Map<String, String> params = this.getUserParam();
+			System.out.println("request url:" + url);
+			System.out.println("request body:" + Json.stringify(Json.toJson(params)));
+			String post = HTTP.post(url, params).toStr();
+			System.out.println("response body:" + post);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
 	@Test
-	public void testUpdate() throws Exception {
-		User u = userRepository.find(6L);
-		u.setName("ABC");
-		userRepository.update(u.getName(), u.getAge(), u.getId());
-		System.err.println("修改成功！");
+	public void testUpdate() {
+		try {
+			String url = "http://localhost:2222/user/update";
+			Map<String, String> params = this.getUserParam();
+			params.put("id", "1");
+			params.put("name", "xzxy1");
+			System.out.println("request url:" + url);
+			System.out.println("request body:" + Json.stringify(Json.toJson(params)));
+			String post = HTTP.post(url, params).toStr();
+			System.out.println("response body:" + post);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void testDelete() {
+		try {
+			String url = "http://localhost:2222/user/delete";
+			Map<String, String> params = this.getUserParam();
+			params.put("id", "1");
+			System.out.println("request url:" + url);
+			System.out.println("request body:" + Json.stringify(Json.toJson(params)));
+			String post = HTTP.post(url, params).toStr();
+			System.out.println("response body:" + post);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
-	@Test
-	public void testDelete() throws Exception {
-		userRepository.delete(6L);
-		System.err.println("删除成功！");
+	/**
+	 * 获取用户参数
+	 * @return
+	 */
+	private Map<String, String> getUserParam(){
+		Map<String, String> params = new HashMap<>();
+		params.put("name", "xzxy");
+		params.put("age", "12");
+		params.put("password", "12456");
+		return params;
 	}
 }

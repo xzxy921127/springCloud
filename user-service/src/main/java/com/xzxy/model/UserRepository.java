@@ -1,16 +1,13 @@
 package com.xzxy.model;
 
-import java.util.List;
-
-import javax.transaction.Transactional;
-
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.data.repository.query.Param;
-
-public interface UserRepository extends PagingAndSortingRepository<User, Long>,JpaSpecificationExecutor<User> {
+/**
+ * 此类废弃,已改用EBean框架来做持久化
+ * @author XZXY
+ *
+ */
+@Deprecated
+public interface UserRepository /* extends PagingAndSortingRepository<User, Long>,JpaSpecificationExecutor<User>*/ {
+/*	
     @Query("from User u where u.id=:id")
     User find(@Param("id") Long id);
     
@@ -35,4 +32,5 @@ public interface UserRepository extends PagingAndSortingRepository<User, Long>,J
 
     @Query("from User u where u.id=:id")
 	User getUserById(@Param("id")Long id);
+*/
 }
